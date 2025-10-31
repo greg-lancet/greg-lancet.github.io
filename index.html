@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grégoire Triay - Professional Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f5f1e8;
+            --brown: #6b4423;
+            --dark-brown: #3d2817;
+            --sage: #8b9b7e;
+            --terracotta: #c77a5a;
+            --light-sage: #b8c5b0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: var(--dark-brown);
+            overflow-x: hidden;
+        }
+
+        /* Navigation fixe en haut */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--cream);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--terracotta);
+        }
+
+        /* Hero Section - Style Magazine */
+        .hero {
+            min-height: 100vh;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(80px, 15vw, 200px);
+            font-weight: 900;
+            color: var(--brown);
+            text-align: center;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .hero-subtitle {
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--dark-brown);
+            margin-bottom: 60px;
+            font-weight: 600;
+        }
+
+        /* Grid de sections - Style Editorial */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 80px;
+        }
+
+        .editorial-section {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .editorial-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .editorial-section:hover::before {
+            opacity: 1;
+        }
+
+        .section-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .editorial-section:hover .section-image {
+            transform: scale(1.05);
+        }
+
+        .section-number {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--cream);
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        .section-title {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--cream);
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Pages de contenu - Style Magazine */
+        .content-page {
+            background: var(--cream);
+            padding: 120px 60px 80px;
+            min-height: 100vh;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(60px, 10vw, 120px);
+            font-weight: 900;
+            color: var(--brown);
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--dark-brown);
+            font-weight: 600;
+        }
+
+        /* Cards éditorial */
+        .editorial-card {
+            background: white;
+            margin-bottom: 60px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 50px 60px 30px;
+            border-bottom: 2px solid var(--brown);
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 15px;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 30px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 40px 60px 50px;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-content li {
+            padding: 12px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.8;
+            color: var(--dark-brown);
+        }
+
+        .card-content li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--terracotta);
+            font-weight: 600;
+        }
+
+        /* Section Objectif */
+        .objectif-box {
+            background: var(--brown);
+            color: var(--cream);
+            padding: 60px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .objectif-box::before {
+            content: '"';
+            position: absolute;
+            top: 0px;
+            left: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+            color: rgba(245, 241, 232, 0.2);
+            line-height: 1;
+        }
+
+        .objectif-text {
+            font-size: 18px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Skills Grid - Style Magazine */
+        .skills-editorial {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .skill-block {
+            border-left: 4px solid var(--brown);
+            padding-left: 25px;
+        }
+
+        .skill-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--brown);
+            margin-bottom: 20px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: white;
+            padding: 8px 16px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--brown);
+            color: var(--dark-brown);
+            font-weight: 600;
+        }
+
+        /* Contact Info */
+        .contact-editorial {
+            background: var(--sage);
+            padding: 60px;
+            margin: 80px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .contact-item {
+            color: white;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            /* Réduit de 18px à 16px */
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* Responsive pour contact */
+        @media (max-width: 768px) {
+            .contact-editorial {
+                padding: 40px 20px;
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 40px 0;
+            }
+
+            .contact-value {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-editorial {
+                padding: 30px 15px;
+            }
+
+            .contact-value {
+                font-size: 13px;
+            }
+        }
+
+        /* CV Downloads */
+        .cv-section {
+            text-align: center;
+            padding: 80px 0;
+            background: white;
+            margin: 60px 0;
+        }
+
+        .cv-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: var(--brown);
+            margin-bottom: 40px;
+        }
+
+        .cv-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-editorial {
+            padding: 20px 50px;
+            background: var(--brown);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--brown);
+        }
+
+        .btn-editorial:hover {
+            background: transparent;
+            color: var(--brown);
+        }
+
+        .btn-editorial.outline {
+            background: transparent;
+            color: var(--brown);
+        }
+
+        .btn-editorial.outline:hover {
+            background: var(--brown);
+            color: var(--cream);
+        }
+
+        /* Video Section */
+        .video-section {
+            background: var(--dark-brown);
+            padding: 80px 60px;
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .video-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: var(--cream);
+            margin-bottom: 20px;
+        }
+
+        .video-subtitle {
+            color: var(--light-sage);
+            margin-bottom: 40px;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .video-placeholder {
+            background: var(--cream);
+            padding: 100px;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .video-icon {
+            font-size: 80px;
+            color: var(--brown);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: var(--cream);
+            padding: 80px 60px 40px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--terracotta);
+        }
+
+        .copyright {
+            margin-top: 60px;
+            font-size: 11px;
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 20px 40px;
+            }
+
+            .hero-title {
+                font-size: 60px;
+            }
+
+            .editorial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-page {
+                padding: 100px 20px 60px;
+            }
+
+            .card-header,
+            .card-content {
+                padding: 30px;
+            }
+
+            .objectif-box {
+                padding: 40px 30px;
+            }
+
+            .contact-editorial {
+                padding: 40px 30px;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image placeholders avec couleurs */
+        .img-green {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--light-sage) 100%);
+        }
+
+        .img-brown {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--dark-brown) 100%);
+        }
+
+        .img-terra {
+            background: linear-gradient(135deg, var(--terracotta) 0%, #a65d42 100%);
+        }
+
+        /* Profil photo style */
+        .profile-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--brown);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="logo">GT</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#engineering">Engineering Courses</a></li>
+            <li><a href="#career">Career Development</a></li>
+            <li><a href="#mobility">Mobility</a></li>
+            <li><a href="#engagement">Civic Engagement</a></li>
+            <li><a href="#activities">Sports & Activities</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">GRÉGOIRE<br>TRIAY</h1>
+            <p class="hero-subtitle">Solution Architect × Engineering Student</p>
+
+            <!-- Introduction -->
+            <div style="max-width: 900px; margin: 60px auto 80px; text-align: center;">
+                <p style="font-size: 18px; line-height: 1.8; color: var(--dark-brown); font-weight: 400;">
+                    Welcome to my professional portfolio. I'm a final-year engineering student at
+                    <strong>ENSEEIHT</strong>,
+                    specializing in Digital Sciences with a focus on Artificial Intelligence, blockchain technology,
+                    and complex systems optimization.
+                </p>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--dark-brown); margin-top: 20px;">
+                    This eportfolio showcases my academic journey, professional experiences, and career aspirations
+                    as I prepare for international mobility and future leadership roles in technology innovation.
+                </p>
+            </div>
+
+            <!-- Grid Editorial -->
+            <div class="editorial-grid">
+                <a href="#engineering" class="editorial-section">
+                    <div class="section-image img-green"></div>
+                    <span class="section-number">01 EDUCATION</span>
+                    <h3 class="section-title"> </h3>
+                </a>
+                <a href="#career" class="editorial-section">
+                    <div class="section-image img-brown"></div>
+                    <span class="section-number">02 EXPERIENCE</span>
+                    <h3 class="section-title"> </h3>
+                </a>
+                <a href="#mobility" class="editorial-section">
+                    <div class="section-image img-terra"></div>
+                    <span class="section-number">03 GLOBAL</span>
+                    <h3 class="section-title"> </h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <!--
+    <div class="contact-editorial">
+        <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">gregoire.triay@etu.toulouse-inp.fr</div>
+        </div>
+        <div class="contact-item">
+            <div class="contact-label">Téléphone</div>
+            <div class="contact-value">+33 6 13 69 23 92</div>
+        </div>
+        <div class="contact-item">
+            <div class="contact-label">Localisation</div>
+            <div class="contact-value">Toulouse, France</div>
+        </div>
+        <div class="contact-item">
+            <div class="contact-label">Date de naissance</div>
+            <div class="contact-value">14 Mars 2005</div>
+        </div>
+    </div>
+    -->
+    <!-- Page Accueil/Objectif -->
+    <section class="content-page">
+        <div class="content-container" style="backdrop-filter: blur(30px); border-radius: 5px;">
+            <div class="page-header fade-up">
+                <h2 class="page-title">Welcome</h2>
+                <p class="page-subtitle">My Journey & Goals</p>
+            </div>
+
+            <div class="objectif-box fade-up" style="border-radius: 5px;">
+                <p class="objectif-text">
+                    "Success is not final, failure is not fatal: it is the courage to continue that counts." — Winston
+                    Churchill
+                </p>
+            </div>
+
+            <!-- CV Downloads -->
+            <div class="cv-section fade-up">
+                <h3 class="cv-title">Curriculum Vitae</h3>
+                <div class="cv-buttons">
+                    <a href="./cvs/cv_fr.pdf" class="btn-editorial">📄 CV French</a>
+                    <a href="./cvs/cv_en.pdf" class="btn-editorial">📄 CV English</a>
+                    <a href="https://www.linkedin.com/in/gr%C3%A9goire-triay-b07b75386/"
+                        class="btn-editorial outline">💼 LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formation Ingénieur -->
+    <section class="content-page" id="engineering" style="background: white;">
+        <div class="content-container">
+            <div class="page-header fade-up">
+                <h2 class="page-title">Engineering Education</h2>
+                <p class="page-subtitle">Academic Background</p>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">ENSEEIHT - Computer Science</h3>
+                    <div class="card-meta">
+                        <span>2025 – Present</span>
+                        <span>Toulouse, France</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p style="font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                        Engineering degree specialized in Digital Sciences, with focus on artificial intelligence,
+                        optimization, and complex systems.
+                    </p>
+                </div>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">Prépa des INPs Toulouse</h3>
+                    <div class="card-meta">
+                        <span>2023 – 2025</span>
+                        <span>Classe Préparatoire</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p style="font-size: 16px; line-height: 1.8;">
+                        Two-year intensive preparatory program for engineering schools, with rigorous training in
+                        mathematics, physics, and engineering sciences.
+                    </p>
+                </div>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">High School Diploma - With Highest Honors</h3>
+                    <div class="card-meta">
+                        <span>2022</span>
+                        <span>Lycée Pierre d'Aragon</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Mathematics and Physics specializations</li>
+                        <li>Participated in National French and History Competition (2021)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Compétences -->
+            <div style="margin-top: 100px;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 48px; color: var(--brown); margin-bottom: 60px; text-align: center;">
+                    Technical Skills
+                </h3>
+
+                <div class="skills-editorial">
+                    <div class="skill-block fade-up">
+                        <h3>Development</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Front-End</span>
+                            <span class="skill-tag">Back-End</span>
+                            <span class="skill-tag">DevOps</span>
+                            <span class="skill-tag">APIs</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>Artificial Intelligence</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">Neural Networks</span>
+                            <span class="skill-tag">LLMs</span>
+                            <span class="skill-tag">Regression</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>Blockchain</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Smart Contracts</span>
+                            <span class="skill-tag">Rust</span>
+                            <span class="skill-tag">Elrond</span>
+                            <span class="skill-tag">Architecture</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>Data & Analytics</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Data Science</span>
+                            <span class="skill-tag">Modeling</span>
+                            <span class="skill-tag">Optimization</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>Project Management</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Notion</span>
+                            <span class="skill-tag">Trello</span>
+                            <span class="skill-tag">Todoist</span>
+                            <span class="skill-tag">Agile</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>Fields of Expertise</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Biology</span>
+                            <span class="skill-tag">Physics</span>
+                            <span class="skill-tag">Chemistry</span>
+                            <span class="skill-tag">Communication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expériences Professionnelles -->
+    <section class="content-page" id="career">
+        <div class="content-container">
+            <div class="page-header fade-up">
+                <h2 class="page-title">Professional Experience</h2>
+                <p class="page-subtitle">Career Development</p>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">Solution Architect</h3>
+                    <div class="card-meta">
+                        <span>Connektica</span>
+                        <span>Juin 2025 – Present</span>
+                        <span>Toulouse / Montréal</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Solving complex industrial client requirements</li>
+                        <li>Designing solutions for complex problems</li>
+                        <li>Data Science using Power BI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">Expert Blockchain & Back-end</h3>
+                    <div class="card-meta">
+                        <span>New Waves Payments</span>
+                        <span>2020 – 2023</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Design and development of cryptocurrency payment solution for merchants</li>
+                        <li>Implementation of Rust smart contracts on blockchain</li>
+                        <li>Architecture and development of highly scalable backend</li>
+                        <li>Close collaboration with merchants to adapt the solution</li>
+                        <li>Autonomous management of development and deployment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">Architecte Performance</h3>
+                    <div class="card-meta">
+                        <span>Tuleeps</span>
+                        <span>2019</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Development of high-performance backend services in Rust</li>
+                        <li>Implementation of complex matching system</li>
+                        <li>Integration of WebRTC protocol for instant messaging</li>
+                        <li>Continuous optimization of system performance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">Lead Développeur</h3>
+                    <div class="card-meta">
+                        <span>Cloothe</span>
+                        <span>2018 – 2019</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Backend development in Go for fashion social network</li>
+                        <li>Implementation of Deep Learning recommendation algorithms</li>
+                        <li>Design and development of high-performance APIs</li>
+                        <li>Setup of MongoDB and Redis infrastructure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">Expert Blockchain</h3>
+                    <div class="card-meta">
+                        <span>Tchoo</span>
+                        <span>Mai 2018 – Décembre 2018</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Development and deployment of Rust Smart Contracts on Elrond</li>
+                        <li>Design and maintenance of highly scalable backend</li>
+                        <li>System performance optimization</li>
+                        <li>Management of blockchain deployments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="editorial-card fade-up">
+                <div class="card-header">
+                    <h3 class="card-title">Lead Back-end</h3>
+                    <div class="card-meta">
+                        <span>Symphonia</span>
+                        <span>2016 – 2018</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Creation and maintenance of multi-protocol proxy system</li>
+                        <li>Continuous code adaptation based on user needs</li>
+                        <li>Network performance optimization</li>
+                        <li>Custom solution development</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Compétences Managériales -->
+            <div style="margin-top: 100px;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 48px; color: var(--brown); margin-bottom: 60px; text-align: center;">
+                    Leadership & Management Skills
+                </h3>
+
+                <div class="skills-editorial">
+                    <div class="skill-block fade-up">
+                        <h3>Technical Leadership</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>Project architecture and technology choices</li>
+                            <li>Establishment of development standards</li>
+                            <li>Technical documentation writing</li>
+                            <li>Development planning and monitoring</li>
+                            <li>Technology watch and innovation</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>Project Management</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>Coordination of technical teams</li>
+                            <li>Definition and tracking of development milestones</li>
+                            <li>Organization of work and priorities</li>
+                            <li>Client relationship management</li>
+                            <li>Quality assurance of deliverables</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Vidéo UVP -->
+            <div class="video-section fade-up">
+                <h3 class="video-title">Unique Value Proposal</h3>
+                <!-- Section Video UVP - YouTube Integration -->
+                <div class="video-placeholder"
+                    style="background: transparent; border-radius: 12px; padding: 40px 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 1000px; margin: 0 auto;">
+                    <!-- YouTube Video Embed (Responsive 16:9) -->
+                        <iframe
+                            src="https://player.vimeo.com/video/1132628377?context=Vimeo%5CController%5CApi%5CResources%5CVideoController.&h=068c547d1f&s=6e1046fb412074c1bef1938fdba89f7a848024a3_1762041639&title=0&byline=0&portrait=0 "
+                            frameborder="0" allow="autoplay; fullscreen"
+                            width="640" 
+                            height="360" 
+                            style="border: none;">
+                            allowfullscreen></iframe>
+
+                    <!-- Description -->
+                    <div style="text-align: center; padding: 25px;">
+                        <!-- Timestamps (optional) -->
+                        <div
+                            style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; font-size: 13px; color: var(--brown); margin-top: 20px; ">
+                            <span style="padding: 6px 12px; background: rgba(139, 69, 19, 0.08); border-radius: 6px;">📍
+                                0:00
+                                Introduction</span>
+                            <span style="padding: 6px 12px; background: rgba(139, 69, 19, 0.08); border-radius: 6px;">📍
+                                0:50
+                                Present</span>
+                            <span style="padding: 6px 12px; background: rgba(139, 69, 19, 0.08); border-radius: 6px;">📍
+                                1:30
+                                Past</span>
+                            <span style="padding: 6px 12px; background: rgba(139, 69, 19, 0.08); border-radius: 6px;">📍
+                                2:20
+                                Future</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobilité Internationale -->
+    <section class="content-page" id="mobility" style="background: white;">
+        <div class="content-container">
+            <div class="page-header fade-up">
+                <h2 class="page-title">Mobility</h2>
+                <p class="page-subtitle">International Experience & Languages</p>
+            </div>
+
+            <!-- Languages -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 80px;">
+                <div class="editorial-card fade-up">
+                    <div class="card-header">
+                        <h3 class="card-title">🇬🇧 English</h3>
+                        <div class="card-meta">
+                            <span>Level C2 - Bilingual</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 16px; line-height: 1.8;">
+                            Full professional proficiency. Daily use in technical and managerial contexts.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="editorial-card fade-up">
+                    <div class="card-header">
+                        <h3 class="card-title">🇪🇸 Spanish</h3>
+                        <div class="card-meta">
+                            <span>Level B1 - Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 16px; line-height: 1.8;">
+                            Ability to communicate in everyday and simple professional situations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- International Mobility Projects -->
+            <div style="margin-top: 100px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 48px; color: var(--brown); margin-bottom: 30px; text-align: center;"
+                    id="projets">
+                    International Mobility Projects
+                </h3>
+                <p style="text-align: center; margin-bottom: 60px; color: var(--dark-brown); font-size: 16px;">
+                    Planned destinations aligned with my career goals in AI, blockchain, and technology innovation
+                </p>
+
+                <!-- Motivation for International Experience -->
+                <div class="objectif-box fade-up" style="background: var(--sage); margin-bottom: 60px;">
+                    <p class="objectif-text">
+                        International mobility is essential to my professional development. Working in diverse cultural
+                        and
+                        technical environments will broaden my perspective on technology innovation, expose me to
+                        different
+                        approaches to problem-solving, and help me build a global professional network. I aim to gain
+                        experience
+                        in countries leading AI and blockchain innovation while developing cross-cultural competencies
+                        essential
+                        for modern tech leadership.
+                    </p>
+                </div>
+
+                <!-- Project 1: United States (Silicon Valley / GT) -->
+                <div class="editorial-card fade-up">
+                    <div class="card-header">
+                        <h3 class="card-title">🇺🇸 Mobility Project 1: United States</h3>
+                        <div class="card-meta">
+                            <span>Target: Silicon Valley / Georgia Tech</span>
+                            <span>Duration: 1 semester or internship</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                            <strong>Motivation:</strong> The United States, particularly Silicon Valley and Boston,
+                            represents
+                            the global epicenter of AI and blockchain innovation. Companies like OpenAI, Google
+                            DeepMind, and
+                            leading blockchain firms are headquartered there.
+                        </p>
+                        <ul>
+                            <li><strong>Target Institutions:</strong> MIT, Stanford University, UC Berkeley, or tech
+                                companies
+                                in San Francisco Bay Area</li>
+                            <li><strong>Focus Areas:</strong> Advanced AI research, blockchain scalability solutions,
+                                fintech innovation</li>
+                            <li><strong>Expected Learning:</strong> Exposure to cutting-edge research, startup ecosystem
+                                immersion,
+                                networking with industry leaders</li>
+                            <li><strong>Career Alignment:</strong> Directly supports my goal of becoming a technical
+                                leader at
+                                the intersection of AI and blockchain</li>
+                            <li><strong>Timeline:</strong> Target for 2026 academic exchange or summer internship</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 2: Switzerland (ETH Zurich / EPFL) -->
+                <div class="editorial-card fade-up">
+                    <div class="card-header">
+                        <h3 class="card-title">🇨🇭 Mobility Project 2: Switzerland</h3>
+                        <div class="card-meta">
+                            <span>Target: ETH Zurich / EPFL / Crypto Valley</span>
+                            <span>Duration: 1 semester</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                            <strong>Motivation:</strong> Switzerland combines world-class technical universities (ETH
+                            Zurich, EPFL)
+                            with the "Crypto Valley" in Zug - the global hub for blockchain companies and foundations
+                            like Ethereum.
+                        </p>
+                        <ul>
+                            <li><strong>Target Institutions:</strong> ETH Zurich (top 10 global engineering school),
+                                EPFL
+                                (École Polytechnique Fédérale de Lausanne)</li>
+                            <li><strong>Focus Areas:</strong> Distributed systems, cryptography, blockchain governance
+                            </li>
+                            <li><strong>Expected Learning:</strong> Academic rigor in computer science, proximity to
+                                major
+                                blockchain foundations, multilingual environment (German/French/English)</li>
+                            <li><strong>Career Alignment:</strong> Ideal for deepening theoretical understanding of
+                                blockchain
+                                consensus mechanisms and cryptographic protocols</li>
+                            <li><strong>Timeline:</strong> Target for Fall 2026 exchange semester</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 3: Singapore (NUS / NTU) -->
+                <div class="editorial-card fade-up">
+                    <div class="card-header">
+                        <h3 class="card-title">🇸🇬 Mobility Project 3: Singapore</h3>
+                        <div class="card-meta">
+                            <span>Target: NUS / NTU / Tech Companies</span>
+                            <span>Duration: Semester exchange or internship</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                            <strong>Motivation:</strong> Singapore is Asia's leading technology and finance hub, with
+                            strong government
+                            support for AI and blockchain innovation. The city-state bridges Eastern and Western
+                            business cultures.
+                        </p>
+                        <ul>
+                            <li><strong>Target Institutions:</strong> National University of Singapore (NUS), Nanyang
+                                Technological
+                                University (NTU), or fintech companies</li>
+                            <li><strong>Focus Areas:</strong> AI in finance, smart city technologies, blockchain in
+                                supply chain</li>
+                            <li><strong>Expected Learning:</strong> Asian approach to technology adoption, fintech
+                                ecosystem exposure,
+                                emerging markets perspective</li>
+                            <li><strong>Career Alignment:</strong> Particularly relevant for my interest in fintech and
+                                the convergence
+                                of AI with financial services</li>
+                            <li><strong>Timeline:</strong> Target for 2026-2027 academic year or summer internship</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Career Alignment Summary -->
+                <div style="margin-top: 60px;">
+                    <h3
+                        style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--brown); margin-bottom: 30px;">
+                        How International Experience Shapes My Career Goals
+                    </h3>
+                    <div class="editorial-card fade-up">
+                        <div class="card-content">
+                            <p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px;">
+                                Each mobility destination serves specific career development objectives:
+                            </p>
+                            <ul style="margin-left: 0; padding-left: 20px;">
+                                <li style="margin-bottom: 15px;"><strong>United States:</strong> Exposure to fast-paced
+                                    innovation
+                                    culture, startup ecosystem, and cutting-edge AI research</li>
+                                <li style="margin-bottom: 15px;"><strong>Switzerland:</strong> Academic excellence,
+                                    blockchain
+                                    industry concentration, multilingual professional environment</li>
+                                <li style="margin-bottom: 15px;"><strong>Singapore:</strong> Asia-Pacific market
+                                    perspective,
+                                    fintech applications, cross-cultural business practices</li>
+                            </ul>
+                            <p style="font-size: 16px; line-height: 1.8; margin-top: 20px;">
+                                These experiences will prepare me for leadership roles in global technology companies or
+                                to launch
+                                international ventures in AI and blockchain sectors.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Civic Engagement -->
+    <section class="content-page" id="engagement">
+        <div class="content-container">
+            <div class="page-header fade-up">
+                <h2 class="page-title">Civic Engagement</h2>
+                <p class="page-subtitle">Sustainability & Community Contribution</p>
+            </div>
+
+            <div class="objectif-box fade-up" style="background: var(--sage);">
+                <p class="objectif-text">
+                    As part of the ENSEEIHT engineering diploma requirements, students must complete 40 weeks of civic
+                    engagement. This section is dedicated to documenting my civic commitments, sustainability projects,
+                    and initiatives aimed at contributing positively to society. I am committed to meaningful engagement
+                    that aligns with my values in technology accessibility, environmental sustainability, and education.
+                </p>
+            </div>
+
+            <div style="margin-top: 60px;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--brown); margin-bottom: 40px;">
+                    Areas of Engagement
+                </h3>
+
+                <div class="skills-editorial">
+                    <div class="skill-block fade-up">
+                        <h3>♻️ Environmental Sustainability</h3>
+                        <p style="margin-top: 15px; line-height: 1.8; color: var(--dark-brown);">
+                            <strong>Planned Activities:</strong> Participation in TEDD (Transition Écologique et
+                            Développement
+                            Durable) association at ENSEEIHT. Focus on sustainable technology practices, energy
+                            efficiency
+                            in data centers, and green computing initiatives. Target: 10-15 weeks of involvement through
+                            workshops, awareness campaigns, and eco-responsible tech projects.
+                        </p>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>💻 Digital Literacy & Education</h3>
+                        <p style="margin-top: 15px; line-height: 1.8; color: var(--dark-brown);">
+                            <strong>Planned Activities:</strong> Volunteer as coding instructor for underprivileged
+                            youth
+                            or students from non-technical backgrounds. Teach fundamental programming, introduce AI
+                            concepts,
+                            and demystify blockchain technology. Partner with local community centers or NGOs promoting
+                            digital inclusion. Target: 10-12 weeks.
+                        </p>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>🎓 Mentoring & Tutoring</h3>
+                        <p style="margin-top: 15px; line-height: 1.8; color: var(--dark-brown);">
+                            <strong>Planned Activities:</strong> Mentor junior students at ENSEEIHT or Prépa des INPs in
+                            mathematics, physics, and computer science. Provide guidance on career paths in tech, help
+                            with
+                            technical projects, and share professional experiences. Target: 8-10 weeks.
+                        </p>
+                    </div>
+
+                    <div class="skill-block fade-up">
+                        <h3>🌍 Technology for Social Good</h3>
+                        <p style="margin-top: 15px; line-height: 1.8; color: var(--dark-brown);">
+                            <strong>Planned Activities:</strong> Contribute technical skills to non-profit organizations
+                            or social enterprises. Potential projects: developing websites for local associations,
+                            creating
+                            data analysis tools for NGOs, or building educational platforms. Target: 10-12 weeks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Engagement Timeline -->
+            <div style="margin-top: 80px;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--brown); margin-bottom: 40px;">
+                    40-Week Engagement Tracker
+                </h3>
+
+                <div class="editorial-card fade-up">
+                    <div class="card-content" style="padding: 40px;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <p style="font-size: 18px; color: var(--dark-brown); margin-bottom: 20px;">
+                                📊 Current Progress: <strong>0 / 40 weeks completed</strong>
+                            </p>
+                            <div
+                                style="background: #e0e0e0; height: 30px; border-radius: 15px; overflow: hidden; margin: 20px 0;">
+                                <div style="background: var(--sage); width: 0%; height: 100%; transition: width 0.3s;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4
+                            style="font-family: 'Playfair Display', serif; font-size: 22px; color: var(--brown); margin-bottom: 20px; margin-top: 40px;">
+                            Planned Engagement Timeline (2025-2027)
+                        </h4>
+                        <ul style="margin-left: 20px; line-height: 2;">
+                            <li><strong>Spring 2025:</strong> Begin involvement with TEDD association, attend
+                                environmental
+                                sustainability workshops (Target: 3-4 weeks)</li>
+                            <li><strong>Summer 2025:</strong> Volunteer coding instructor at community center or online
+                                platform (Target: 4-5 weeks)</li>
+                            <li><strong>Fall 2025:</strong> Mentor junior students at ENSEEIHT, contribute to student
+                                association tech projects (Target: 5-6 weeks)</li>
+                            <li><strong>Spring 2026:</strong> Continue TEDD participation, develop pro-bono tech
+                                solution
+                                for local NGO (Target: 6-8 weeks)</li>
+                            <li><strong>Academic Year 2026-2027:</strong> Sustained engagement through tutoring and
+                                environmental projects (Target: remaining weeks to reach 40)</li>
+                        </ul>
+
+                        <p style="margin-top: 30px; font-style: italic; color: var(--terracotta); text-align: center;">
+                            This section will be regularly updated with completed projects and validated civic
+                            engagement hours.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Civic Engagement Matters -->
+            <div style="margin-top: 60px;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--brown); margin-bottom: 30px;">
+                    Why Civic Engagement Matters to Me
+                </h3>
+                <div class="editorial-card fade-up">
+                    <div class="card-content">
+                        <p style="font-size: 16px; line-height: 1.8;">
+                            As an engineer working at the intersection of AI and blockchain, I believe technology should
+                            serve society and be accessible to all. Civic engagement allows me to give back to the
+                            community,
+                            share my technical knowledge with those who might not have access to it, and contribute to
+                            environmental sustainability through responsible technology practices.
+                        </p>
+                        <p style="font-size: 16px; line-height: 1.8; margin-top: 15px;">
+                            My focus areas reflect my conviction that engineers have a responsibility to address digital
+                            inequality, environmental challenges, and educational gaps. By dedicating time to these
+                            causes,
+                            I aim to become not just a skilled technologist, but a socially conscious leader who uses
+                            innovation for positive impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sport & Activités -->
+    <section class="content-page" style="background: white;">
+        <div class="content-container">
+            <div class="page-header fade-up">
+                <h2 class="page-title">Sports & Activities</h2>
+                <p class="page-subtitle">Athletics & Personal Interests</p>
+            </div>
+
+            <!-- Centres d'intérêt -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 80px;">
+                <div class="editorial-card fade-up">
+                    <div class="card-header" style="border-bottom-color: var(--sage);">
+                        <h3 class="card-title" style="font-size: 28px;">💻 Computer Science</h3>
+                    </div>
+                    <div class="card-content">
+                        <p style="line-height: 1.8;">
+                            Passion for new technologies, innovation, and development of cutting-edge technical
+                            solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="editorial-card fade-up">
+                    <div class="card-header" style="border-bottom-color: var(--terracotta);">
+                        <h3 class="card-title" style="font-size: 28px;">🔬 Research</h3>
+                    </div>
+                    <div class="card-content">
+                        <p style="line-height: 1.8;">
+                            Continuous technology and scientific watch, exploration of new fields and methodologies.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="editorial-card fade-up">
+                    <div class="card-header" style="border-bottom-color: var(--brown);">
+                        <h3 class="card-title" style="font-size: 28px;">💰 Finance</h3>
+                    </div>
+                    <div class="card-content">
+                        <p style="line-height: 1.8;">
+                            Strong interest in financial markets, fintech, and cryptocurrencies.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="editorial-card fade-up">
+                    <div class="card-header" style="border-bottom-color: var(--light-sage);">
+                        <h3 class="card-title" style="font-size: 28px;">💡 Innovation</h3>
+                    </div>
+                    <div class="card-content">
+                        <p style="line-height: 1.8;">
+                            Constant exploration of creative and disruptive solutions to contemporary problems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activités sportives -->
+            <div>
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--brown); margin-bottom: 40px;">
+                    Sports & Student Activities
+                </h3>
+
+                <div class="objectif-box fade-up" style="background: var(--light-sage);">
+                    <p class="objectif-text" style="font-size: 16px;">
+                        <em>This section should be completed with your regular sports activities, club participation,
+                            competitions, student association events, creative hobbies, and any other personal
+                            commitments that enrich your journey.</em>
+                    </p>
+                </div>
+
+                <div class="editorial-card fade-up" style="margin-top: 40px;">
+                    <div class="card-content" style="padding: 40px;">
+                        <h4
+                            style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--brown); margin-bottom: 20px;">
+                            Suggested content to add:
+                        </h4>
+                        <ul style="margin-left: 20px;">
+                            <li>Regularly practiced sports</li>
+                            <li>Participation in competitions or sporting events</li>
+                            <li>Student clubs and associations</li>
+                            <li>Creative or artistic projects</li>
+                            <li>Travel and cultural discoveries</li>
+                            <li>Additional certifications or training</li>
+                            <li>Significant personal projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Final -->
+    <section class="content-page" id="contact">
+        <div class="content-container">
+            <div class="page-header fade-up">
+                <h2 class="page-title">Contact</h2>
+                <p class="page-subtitle">Let's Stay Connected</p>
+            </div>
+
+            <div class="objectif-box fade-up" style="background: var(--dark-brown);">
+                <p class="objectif-text" style="text-align: center;">
+                    Feel free to contact me to discuss projects, professional opportunities, or to exchange ideas on
+                    technical subjects. I'm open to any enriching collaboration.
+                </p>
+            </div>
+
+            <div class="contact-editorial" style="margin-top: 60px;">
+                <div class="contact-item">
+                    <div class="contact-label">Professional Email</div>
+                    <div class="contact-value">gregoire.triay@etu.toulouse-inp.fr</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">+33 6 13 69 23 92</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Address</div>
+                    <div class="contact-value">3 Impasse des Pibouls<br>31410 Noé, France</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Internship Availability</div>
+                    <div class="contact-value">2 months - 2025/2026</div>
+                </div>
+            </div>
+
+            <!-- Liens rapides -->
+            <div style="text-align: center; margin-top: 80px;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--brown); margin-bottom: 40px;">
+                    Quick Links
+                </h3>
+                <div class="cv-buttons">
+                    <a href="mailto:gregoire.triay@etu.toulouse-inp.fr" class="btn-editorial">📧 Send Email</a>
+                    <a href="https://www.linkedin.com/in/gr%C3%A9goire-triay-b07b75386/"
+                        class="btn-editorial outline">💼 LinkedIn</a>
+                    <a href="https://github.com/greg-lancet" class="btn-editorial outline">🐱 GitHub</a>
+                    <a href="./cvs/cv_fr.pdf" class="btn-editorial outline">📄 CV PDF</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="footer-title">Grégoire Triay</h2>
+            <p style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px;">
+                Solution Architect × Engineering Student × AI & Blockchain Expert
+            </p>
+
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#engineering">Education</a>
+                <a href="#career">Career</a>
+                <a href="#mobility">Mobility</a>
+                <a href="#engagement">Engagement</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(245, 241, 232, 0.2);">
+                <p class="copyright">
+                    © 2025 Grégoire Triay - E-Portfolio | ENSEEIHT - Digital Sciences<br>
+                    <span style="font-size: 10px; opacity: 0.5; margin-top: 10px; display: inline-block;">
+                        Created as part of the CAM L3 - Marketing module
+                    </span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer pour les animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Parallax effect pour le hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Navigation active state
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.style.color = 'var(--cream)';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--terracotta)';
+                }
+            });
+        });
+
+        // Hover effect sur les cartes éditoriales
+        document.querySelectorAll('.editorial-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-5px)';
+                this.style.transition = 'all 0.3s ease';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Image placeholder colors rotation
+        const imgSections = document.querySelectorAll('.editorial-section');
+        imgSections.forEach((section, index) => {
+            section.addEventListener('click', function () {
+                console.log(`Section ${index + 1} clicked`);
+                // Vous pouvez ajouter une navigation vers les sections correspondantes
+            });
+        });
+
+        // Mobile menu toggle (à implémenter si nécessaire)
+        const createMobileMenu = () => {
+            if (window.innerWidth <= 768) {
+                const nav = document.querySelector('.top-nav');
+                // Logique du menu mobile à ajouter si besoin
+            }
+        };
+
+        window.addEventListener('resize', createMobileMenu);
+        createMobileMenu();
+    </script>
+</body>
+
+</html>
